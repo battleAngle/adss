@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import 'antd/dist/antd.css';
 
 import { HeaderMenu } from './header';
+import { SiderLayout } from './sider';
+import { ContentLayout } from './content';
 
 
 const { Header, Sider, Content } = Layout;
@@ -16,7 +18,7 @@ const AppContainer = styled.div`
     }
     .ant-layout-header{
         height: 100px;
-        background-color:#200955;
+        background-color:#1E0656;
     }
 `;
 
@@ -29,13 +31,13 @@ function App() {
                     <Header >
                         <HeaderMenu></HeaderMenu>
                     </Header>
-                    <Layout>
-                        <Sider theme='light' >Sider</Sider>
-                        <Content>Content</Content>
+                    <Layout style={{ backgroundColor: '#210956' }} >
+                        <SiderLayout />
+                        <ContentLayout />
                     </Layout>
                 </Layout>
             </AppContainer>
-        </React.Suspense>
+        </React.Suspense >
     );
 }
 
