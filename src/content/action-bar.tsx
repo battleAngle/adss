@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { Space, Row, Col } from 'antd';
 
 const Action = styled.div`
-    background-color:#1C1566;
-    height: 150px;
-    margin: 0px 50px;
-    text-align:center;
-    line-height: 130px;
-    font-size: 40px;
-    font-weight: bold; 
-    color:#F5F6F4;
-    cursor:pointer;
+background-color: #1C1566;
+height: 100px;
+margin: 0px 50px;
+text-align: center;
+line-height: 100px;
+font-size: 30px;
+font-weight: bold;
+color: #F5F6F4;
+cursor: pointer;
 
     &.action-active {
         color:#04F8ED;
