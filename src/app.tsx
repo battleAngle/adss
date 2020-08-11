@@ -15,10 +15,12 @@ const { Header, Sider, Content } = Layout;
 const AppContainer = styled.div`
     .ant-layout{
         height: 100%;
+        overflow:hidden;
     }
     .ant-layout-header{
         height: 100px;
-        background-color:#1E0656;
+        background-color:#301e58;
+        padding:0px;
     }
 `;
 

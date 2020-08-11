@@ -17,42 +17,54 @@ const HeaderContainer = styled.div`
         color: #00FFF4;
     }
     .ant-typography.main-title{
-        text-align:right;
+        text-align:center;
         margin-top:5px;
     }
     .ant-typography.sub-title{
-        text-align:right;
+        font-size:15px;
+        text-align:center;
         top: -4px;
         margin-top:-10px;
     }
     .right-panel{
-        float: right;
-        height:60%;
+        padding: 0px 30px;
+        height: 80px;
+        font-size:19px;
+        top: 0;
+        right: 20px;
+        position: absolute;
     }
-    .badge-count{
+    .right-panel .ant-space-item .badge-count {
         color:#296FB2;
+        font-size:19px;
+        text-align: center;
     }
-    .badge-count span{
-
+    .right-panel-time{
+        padding: 0px 30px;
     }
 `;
 
 export function HeaderMenu() {
     return <HeaderContainer className='right'>
         <Row>
-            <Col span={15}>
+            <Col span={24}>
                 <Title className='main-title'>变电站声学检测系统</Title>
                 <Title className='sub-title' level={4}>Acoustic detection system for Substation</Title>
-            </Col>
-            <Col span={9}>
                 <Space className='right-panel' align='end' >
-                    <Badge count='9' className='badge-count' offset={[15, 0]} >
-                        <span>报警数目</span>
-                    </Badge>
+                    <span className='right-panel-time' >
+                        <Badge count='9' className='badge-count' offset={[15, 0]} >
+                            <span>报警数目</span>
+                        </Badge>
+                    </span>
+                    {/* <span className='right-panel-time' > */}
                     <CurrentTime />
+                    {/* </span> */}
                     <UserLogined />
                 </Space>
             </Col>
+            {/* <Col span={9}> */}
+
+            {/* </Col> */}
         </Row>
 
     </HeaderContainer>

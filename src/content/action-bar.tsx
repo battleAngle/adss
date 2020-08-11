@@ -5,13 +5,11 @@ import { Space, Row, Col } from 'antd';
 const Action = styled.div`
     background-color:#1C1566;
     height: 150px;
-    margin: 10px 50px;
+    margin: 0px 50px;
     text-align:center;
-    line-height: 150px;
-    font-size: 50px;
-    font-weight: bold;  line-height: 150px;
-    font-size: 50px;
-    font-weight: bold;
+    line-height: 130px;
+    font-size: 40px;
+    font-weight: bold; 
     color:#F5F6F4;
     cursor:pointer;
 
@@ -23,7 +21,7 @@ const Action = styled.div`
 
 export function ActionBar() {
     return (
-        <Row  >
+        <Row>
             <Col span={8}>
                 <Action>实时监测</Action>
             </Col>
