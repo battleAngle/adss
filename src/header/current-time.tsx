@@ -32,5 +32,5 @@ export function CurrentTime() {
 
         return () => clearInterval(intervalId);
     });
-    return <Container>{currentTime.format('yyyy-MM-dd hh:mm:ss')}</Container>
+    return <Container>{currentTime.format('yyyy-MM-dd hh:mm')}</Container>
 }
