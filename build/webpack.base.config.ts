@@ -13,7 +13,7 @@ const config: webpack.Configuration = {
         '../src/app.tsx'
     ] : ['../src/app.tsx'],
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, '../docs'),
         filename: 'js/app-[name].js'
     },
     node: {

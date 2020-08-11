@@ -60,7 +60,7 @@ export function RealTimeMonitor() {
     return <MonitorContainer>
         <Row className='row-padding' style={{ marginTop: '65px' }}  >
             <Col span={18} offset={1}  >
-                <img src='/assets/charts.png' />
+                <img src='https://battleangle.github.io/adss/assets/charts.png' />
             </Col>
             <Col span={3} className='sub-name'>
                 时域
