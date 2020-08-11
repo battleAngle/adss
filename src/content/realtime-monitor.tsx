@@ -7,14 +7,17 @@ import charts from '../assets/charts.png';
 
 const MonitorContainer = styled.div`
     background-color:#1C1566;
-    margin: 35px 50px;
+    padding: 20px 30px;
+    margin: 30px 50px;
+    height: calc(100vh - 270px);
+    overflow-y: scroll;
     text-align:center;
     bottom:0;
     .ant-card,.ant-card-bordered{
         background-color:#1C1566;
     }
     .row-padding{
-        padding: 30px 20px;
+        padding: 20px 0px;
     }
     .sub-row-padding{
         padding: 5px 0;
@@ -49,16 +52,17 @@ const MonitorContainer = styled.div`
         background-image: url('/assets/charts.png');
     }
     .sub-name{
-        font-size: 36px;
+        font-size: 25px;
         color:#27EDF5;
         text-align:center;
         line-height: 140px;
+        margin-left: 30px;
     }
 `;
 
 export function RealTimeMonitor() {
     return <MonitorContainer>
-        <Row className='row-padding' style={{ marginTop: '65px' }}  >
+        <Row className='row-padding'  >
             <Col span={18} offset={1}  >
                 <img src='https://battleangle.github.io/adss/assets/charts.png' />
             </Col>
