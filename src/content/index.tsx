@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 
@@ -14,12 +14,24 @@ const ContentBox = styled.div`
 const { Content } = Layout;
 
 export function ContentLayout() {
+    const [activeBar, setActiveBar] = useState<ActiveBar>('systtem-setting');
+    let Bar = null;
+    switch (activeBar) {
+        case 'realtime-monitor':
+            Bar = <RealTimeMonitor />
+            break;
+        case 'system-setting':
+            Bar = <SystemSetting />
+            break;
+        default:
+            break;
+    }
     return <ContentBox>
         <Content>
-            <ActionBar />
-            {/* <SystemSetting /> */}
-            <RealTimeMonitor />
+            <ActionBar changeBar={setActiveBar} activeBar={activeBar} />
+            {Bar}
         </Content>
     </ContentBox>
-
 }
+
+type ActiveBar = 'system-setting' | 'realtime-monitor';
