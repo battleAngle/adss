@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Row, Col, Card, Button, Input } from 'antd';
+import { FolderOpenTwoTone } from '@ant-design/icons';
 
 const SettingContainer = styled.div`
     background-color:#1C1566;
@@ -47,14 +48,14 @@ const SettingContainer = styled.div`
 export function SystemSetting() {
     return (
         <SettingContainer>
-            <div className='card-buttons'>
+            {/* <div className='card-buttons'>
                 <Button>
                     保存
             </Button>
                 <Button>
                     编辑
             </Button>
-            </div>
+            </div> */}
             <Row className='row-padding' >
                 <Col span={10} offset={1}  >
                     <Card title='采集设置'>
@@ -86,14 +87,53 @@ export function SystemSetting() {
                 </Col>
                 <Col span={10} offset={2} >
                     <Card title='报警设置'>
-                        报警设置
+                        <Row align="middle" className='sub-row-padding' style={{ paddingTop: '20px' }} >
+                            <Col span={6} offset={1}>
+                                频率报警区域
+					        </Col>
+                            <Col span={7}>
+                                <Input prefix='上限' suffix='HZ' />
+                            </Col>
+                            <Col span={7} offset={1}>
+                                <Input prefix='下限' suffix='HZ' />
+                            </Col>
+                        </Row>
+                        <Row align="middle" className='sub-row-padding' style={{ paddingTop: '10px' }} >
+                            <Col span={6} offset={1}>
+                                最大报警分贝
+					        </Col>
+                            <Col span={15}>
+                                <Input defaultValue={120} />
+                            </Col>
+                        </Row>
                     </Card>
                 </Col>
             </Row>
             <Row className='row-padding'>
                 <Col title='存储路径' span='22' offset={1} >
                     <Card title='存储路径'>
-                        存储路径
+                        <Row align="middle" className='sub-row-padding' style={{ paddingTop: '20px' }} >
+                            <Col span={4}>
+                                存储路径
+					        </Col>
+                            <Col span={17}>
+                                <Input defaultValue={120} />
+                            </Col>
+                            <Col span={2}>
+                                <FolderOpenTwoTone style={{ fontSize: '22px' }} />
+                            </Col>
+                        </Row>
+                        <Row align="middle" className='sub-row-padding' style={{ paddingTop: '20px' }} >
+                            <Col span={4} >
+                                导出路径
+					        </Col>
+                            <Col span={17}>
+                                <Input defaultValue={120} />
+                            </Col>
+                            <Col span={2}>
+                                <FolderOpenTwoTone style={{ fontSize: '22px' }} />
+                            </Col>
+                        </Row>
                     </Card>
                 </Col>
             </Row>
