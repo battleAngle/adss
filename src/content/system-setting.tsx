@@ -7,19 +7,21 @@ const SettingContainer = styled.div`
     background-color:#1C1566;
     margin: 35px 50px;
     text-align:center;
+    height: calc(100vh - 270px);
+    overflow-y: scroll;
     bottom:0;
     .ant-card,.ant-card-bordered{
         background-color:#1C1566;
     }
     .row-padding{
-        padding: 30px 20px;
+        padding: 20px 20px 10px;
     }
     .sub-row-padding{
         padding: 5px 0;
     }
     
     .ant-card-body{
-        height:180px;
+        height: 150px;
     }
     .card-buttons{
         height: 55px;
@@ -31,6 +33,7 @@ const SettingContainer = styled.div`
         margin:0px 10px;
     }
     .ant-card-head{
+        min-height: 30px;
         border-bottom: 1px solid #07EFE2;
     }
     .ant-card-bordered{
@@ -39,9 +42,16 @@ const SettingContainer = styled.div`
     .ant-card-head-title{
         color:#fff;
         font-size: 20px;
+        padding: 0px;
     }
     .ant-card-body{
         color:#fff;
+    }
+    .title{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display:block
     }
 `;
 
@@ -61,26 +71,26 @@ export function SystemSetting() {
                     <Card title='采集设置'>
                         <Row align="middle" className='sub-row-padding'>
                             <Col span={6} offset={1}>
-                                灵敏度
+                               <span className='title'>灵敏度</span>  
 					        </Col>
                             <Col span={15}>
-                                <Input defaultValue={120} />
+                                <Input size="small"  defaultValue={120} />
                             </Col>
                         </Row>
                         <Row align="middle" className='sub-row-padding' >
                             <Col span={6} offset={1}>
-                                采样率
+                            <span className='title'>采样率</span>  
 					        </Col>
                             <Col span={15}>
-                                <Input defaultValue={120} />
+                                <Input size="small"  defaultValue={120} />
                             </Col>
                         </Row>
                         <Row align="middle" className='sub-row-padding' >
                             <Col span={6} offset={1}>
-                                信噪比
+                            <span className='title'>信噪比</span>  
 					        </Col>
                             <Col span={15}>
-                                <Input defaultValue={120} />
+                                <Input size="small"  defaultValue={120} />
                             </Col>
                         </Row>
                     </Card>
@@ -89,21 +99,21 @@ export function SystemSetting() {
                     <Card title='报警设置'>
                         <Row align="middle" className='sub-row-padding' style={{ paddingTop: '20px' }} >
                             <Col span={6} offset={1}>
-                                频率报警区域
+                            <span className='title'> 频率报警区域</span>  
 					        </Col>
                             <Col span={7}>
-                                <Input prefix='上限' suffix='HZ' />
+                                <Input size="small"  prefix='上限' suffix='HZ' />
                             </Col>
                             <Col span={7} offset={1}>
-                                <Input prefix='下限' suffix='HZ' />
+                                <Input size="small"  prefix='下限' suffix='HZ' />
                             </Col>
                         </Row>
                         <Row align="middle" className='sub-row-padding' style={{ paddingTop: '10px' }} >
                             <Col span={6} offset={1}>
-                                最大报警分贝
+                            <span className='title'> 最大报警分贝</span>  
 					        </Col>
                             <Col span={15}>
-                                <Input defaultValue={120} />
+                                <Input size="small"  defaultValue={120} />
                             </Col>
                         </Row>
                     </Card>
@@ -114,10 +124,10 @@ export function SystemSetting() {
                     <Card title='存储路径'>
                         <Row align="middle" className='sub-row-padding' style={{ paddingTop: '20px' }} >
                             <Col span={4}>
-                                存储路径
+                            <span className='title'> 存储路径</span>  
 					        </Col>
                             <Col span={17}>
-                                <Input defaultValue={120} />
+                                <Input size="small"  defaultValue={120} />
                             </Col>
                             <Col span={2}>
                                 <FolderOpenTwoTone style={{ fontSize: '22px' }} />
@@ -125,10 +135,10 @@ export function SystemSetting() {
                         </Row>
                         <Row align="middle" className='sub-row-padding' style={{ paddingTop: '20px' }} >
                             <Col span={4} >
-                                导出路径
+                            <span className='title'> 导出路径</span>  
 					        </Col>
                             <Col span={17}>
-                                <Input defaultValue={120} />
+                                <Input size="small"  defaultValue={120} />
                             </Col>
                             <Col span={2}>
                                 <FolderOpenTwoTone style={{ fontSize: '22px' }} />

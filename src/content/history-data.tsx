@@ -119,21 +119,7 @@ const dataSource = [
         time:'2020-05-06',
         age: 42,
         address: '西湖区湖底公园1号',
-    },
-    {
-        key: '8',
-        name: '胡彦祖',
-        time:'2020-05-06',
-        age: 42,
-        address: '西湖区湖底公园1号',
-    },
-    {
-        key: '9',
-        name: '胡彦祖',
-        time:'2020-05-06',
-        age: 42,
-        address: '西湖区湖底公园1号',
-    },
+    }
 
 ]
 export function HistoryData() {
