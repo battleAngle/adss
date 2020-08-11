@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 
 import { ActionBar } from './action-bar';
 import { SystemSetting } from './system-setting';
+import {HistoryData} from './history-data';
 
 const ContentBox = styled.div`
     padding: 20px;
@@ -16,7 +17,8 @@ export function ContentLayout() {
     return <ContentBox>
         <Content>
             <ActionBar />
-            <SystemSetting />
+            {/* <SystemSetting /> */}
+            <HistoryData/>
         </Content>
     </ContentBox>
 
