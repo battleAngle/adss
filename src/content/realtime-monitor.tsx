@@ -72,7 +72,7 @@ export function RealTimeMonitor() {
         </Row>
         <Row className='row-padding' >
             <Col span={18} offset={1}  >
-                <img src='/assets/charts.png' />
+                <img src='https://battleangle.github.io/adss/assets/charts.png' />
             </Col>
             <Col span={3} className='sub-name'>
                 频域
@@ -80,7 +80,7 @@ export function RealTimeMonitor() {
         </Row>
         <Row className='row-padding' >
             <Col span={18} offset={1}  >
-                <img src='/assets/charts.png' />
+                <img src='https://battleangle.github.io/adss/assets/charts.png' />
             </Col>
             <Col span={3} className='sub-name'>
                 时频域
