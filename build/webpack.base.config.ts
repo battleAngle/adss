@@ -117,7 +117,7 @@ const config: webpack.Configuration = {
             ...(isDev ? {
                 'react-dom': '@hot-loader/react-dom',
                 '@src': path.resolve(__dirname, '../src/')
-            } : {})
+            } : { '@src': path.resolve(__dirname, '../src/') })
         }
     },
     optimization: {
