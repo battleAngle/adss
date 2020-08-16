@@ -9,8 +9,9 @@ const { Title } = Typography;
 const styles = {
     sider: {
         width: '400px',
-        backgroundColor: '#1D1667'
-        margin: '20px'
+        backgroundColor: '#1D1667',
+        margin: '20px',
+        overflow: 'scroll'
     },
     title: {
         color: '#4186CA',
