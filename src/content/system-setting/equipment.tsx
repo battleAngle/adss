@@ -53,22 +53,10 @@ export function Equipment() {
                 contextMenu={() => {
                     return [{ type: 'editNode' }]
                 }}
-                // onBeforeSave={(saveNode, data, level) => {
-                //     console.log(saveNode, data, level)
-                //     return true
-                // }}
                 onSave={(saveNode, data) => {
                     const { id, title } = saveNode;
                     updateTitleById(id, title);
                 }}
-                // onBeforeDelete={(deleteNode, data, level) => {
-                //     console.log(deleteNode, data, level)
-                //     return true
-                // }}
-                // onDelete={(deleteNode, data) => {
-                //     console.log(deleteNode, data)
-                // }}
-                onChange={data => { console.log('Tree data:', data) }}
                 highlightable
             />
         </SettingContainer>
