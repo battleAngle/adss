@@ -5,15 +5,13 @@ import { Space, Row, Col } from 'antd';
 
 const Action = styled.div`
 background-color: #1C1566;
-height: 100px;
-margin: 0px 50px;
-text-align: center;
-line-height: 100px;
-font-size: 30px;
-font-weight: bold;
-color: #F5F6F4;
-cursor: pointer;
-
+    height: 80px;
+    margin: 0px 30px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 25px;
+    color: #F5F6F4;
+    cursor: pointer;
     &.action-active {
         color:#04F8ED;
     }

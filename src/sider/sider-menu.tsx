@@ -23,28 +23,28 @@ export function SiderMenu() {
                     key="sub1"
                     title={
                         <span>
-                            <span>变压</span>
+                            <span>主变压器</span>
                         </span>
                     }
                 >
 
 
-                    <SubMenu key="sub1-1" title="变压器1">
-                        <Menu.Item key="7">装置1</Menu.Item>
-                        <Menu.Item key="8">装置2</Menu.Item>
+                    <SubMenu key="sub1-1" title="主变1">
+                        <Menu.Item key="7">音频设备分析1</Menu.Item>
+                        <Menu.Item key="8">音频设备分析2</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub1-2" title="变压器2">
-                        <Menu.Item key="9">装置1</Menu.Item>
-                        <Menu.Item key="10">装置2</Menu.Item>
+                    <SubMenu key="sub1-2" title="主变2">
+                        <Menu.Item key="9">音频设备分析3</Menu.Item>
+                        <Menu.Item key="10">音频设备分析4</Menu.Item>
                     </SubMenu>
-                    <SubMenu key="sub1-3" title="变压器3">
-                        <Menu.Item key="11">装置1</Menu.Item>
-                        <Menu.Item key="12">装置2</Menu.Item>
+                    <SubMenu key="sub1-3" title="主变3">
+                        <Menu.Item key="11">音频设备分析5</Menu.Item>
+                        <Menu.Item key="12">音频设备分析16</Menu.Item>
                     </SubMenu>
                 </SubMenu>
-                <SubMenu key="sub2" title="电表">
-                    <Menu.Item key="13">Option 5</Menu.Item>
-                    <Menu.Item key="14">Option 6</Menu.Item>
+                <SubMenu key="sub2" title="控制装置">
+                    <Menu.Item key="13">控制1</Menu.Item>
+                    <Menu.Item key="14">控制2</Menu.Item>
                     <SubMenu key="sub3" title="Submenu">
                         <Menu.Item key="15">Option 7</Menu.Item>
                         <Menu.Item key="16">Option 8</Menu.Item>
@@ -54,7 +54,7 @@ export function SiderMenu() {
                     key="sub4"
                     title={
                         <span>
-                            <span>水表</span>
+                            <span>互感器</span>
                         </span>
                     }
                 >

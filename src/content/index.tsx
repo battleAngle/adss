@@ -4,11 +4,11 @@ import { Layout } from 'antd';
 
 import { ActionBar } from './action-bar';
 import { SystemSetting } from './system-setting';
-import {HistoryData} from './history-data';
+import { HistoryData } from './history-data';
 import { RealTimeMonitor } from './realtime-monitor';
 
 const ContentBox = styled.div`
-    padding: 20px;
+    padding: 20px 0px;
     width:100%;
     height:100%;
 `;
@@ -21,7 +21,7 @@ export function ContentLayout() {
         case 'realtime-monitor':
             Bar = <RealTimeMonitor />
             break;
-            case 'history-data':
+        case 'history-data':
             Bar = <HistoryData />
             break;
         case 'system-setting':
@@ -38,4 +38,4 @@ export function ContentLayout() {
     </ContentBox>
 }
 
-type ActiveBar = 'system-setting' | 'realtime-monitor'|'history-data';
+type ActiveBar = 'system-setting' | 'realtime-monitor' | 'history-data';

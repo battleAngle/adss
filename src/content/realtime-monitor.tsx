@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Row, Col, Card, Button, Input } from 'antd';
+import ReactEcharts from "echarts-for-react";
 
 import charts from '../assets/charts.png';
 
 
 const MonitorContainer = styled.div`
     background-color:#1C1566;
-    padding: 20px 30px;
-    margin: 30px 50px;
-    height: calc(100vh - 270px);
+    padding: 10px 0px;
+    margin: 30px 30px;
+    height: calc(100vh - 250px);
     overflow-y: scroll;
     text-align:center;
     bottom:0;
@@ -17,7 +18,7 @@ const MonitorContainer = styled.div`
         background-color:#1C1566;
     }
     .row-padding{
-        padding: 20px 0px;
+        padding: 10px 0px;
     }
     .sub-row-padding{
         padding: 5px 0;
@@ -29,7 +30,7 @@ const MonitorContainer = styled.div`
     .card-buttons{
         height: 55px;
         width: 100%;
-        padding: 20px 70px 0px 0px;
+        padding: 10px 70px 0px 0px;
     }
     .card-buttons button{
         float:right; 
@@ -55,12 +56,62 @@ const MonitorContainer = styled.div`
         font-size: 25px;
         color:#27EDF5;
         text-align:center;
-        line-height: 140px;
+        line-height: 100px;
         margin-left: 30px;
+    }
+    img{
+        width:100%;
+        height:100px;
     }
 `;
 
+// chart.setOption(option);
 export function RealTimeMonitor() {
+    const option = {
+        title: {
+            text: '设备运行状态图',
+            subtext: '',
+            left: 'center',
+            textStyle: {
+                color: '#F5F6F4'
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b} : {c} ({d}%)'
+        },
+        legend: {
+            bottom: 10,
+            left: 'center',
+            data: ['正常', '预警', '一般报警', '重要报警', '危急报警'],
+            textStyle: {
+                color: '#F5F6F4'
+            }
+        },
+        series: [
+            {
+                type: 'pie',
+                radius: '65%',
+                center: ['50%', '50%'],
+                selectedMode: 'single',
+                data: [
+                    { value: 1548, name: '正常' },
+                    { value: 535, name: '预警' },
+                    { value: 510, name: '一般报警' },
+                    { value: 634, name: '重要报警' },
+                    { value: 735, name: '危急报警' }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
     return <MonitorContainer>
         <Row className='row-padding'  >
             <Col span={18} offset={1}  >
@@ -87,5 +138,10 @@ export function RealTimeMonitor() {
             </Col>
         </Row>
 
+        <ReactEcharts
+            option={option}
+            notMerge={true}
+            lazyUpdate={true}
+            theme={"theme_name"} />
     </MonitorContainer >
 }
