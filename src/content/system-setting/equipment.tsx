@@ -39,7 +39,7 @@ const EquipmentContainer = styled.div`
 
 
 export function Equipment() {
-    const { treeData, updateTitleById } = useMenu();
+    const { treeData, updateTitleById, deleteById, setTreeData } = useMenu();
     return (
         <EquipmentContainer>
             <div className='card-buttons' style={{ textAlign: 'right' }} >
@@ -50,12 +50,17 @@ export function Equipment() {
                 apperance="line"
                 editable={true}
                 data={treeData}
-                contextMenu={() => {
-                    return [{ type: 'editNode' }]
-                }}
+                // contextMenu={() => {
+                //     return [{ type: 'editNode' }, { type: 'deleteNode' }]
+                // }}
                 onSave={(saveNode, data) => {
                     const { id, title } = saveNode;
-                    updateTitleById(id, title);
+                    console.log(saveNode, data, 'xx')
+                    // updateTitleById(id, title);
+                    setTreeData(data);
+                }}
+                onDelete={(deleteNode, data) => {
+                    deleteById(deleteNode.id);
                 }}
                 highlightable
             />

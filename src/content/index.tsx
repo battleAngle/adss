@@ -6,6 +6,7 @@ import { ActionBar } from './action-bar';
 import { SystemSetting } from './system-setting';
 import { HistoryData } from './history-data';
 import { RealTimeMonitor } from './realtime-monitor';
+import useTabBar from '@src/models/use-tabbar';
 
 const ContentBox = styled.div`
     padding: 20px 0px;
@@ -15,7 +16,7 @@ const ContentBox = styled.div`
 const { Content } = Layout;
 
 export function ContentLayout() {
-    const [activeBar, setActiveBar] = useState<ActiveBar>('system-setting');
+    const { activeBar, setActiveBar } = useTabBar();
     let Bar = null;
     switch (activeBar) {
         case 'realtime-monitor':
@@ -37,5 +38,3 @@ export function ContentLayout() {
         </Content>
     </ContentBox>
 }
-
-type ActiveBar = 'system-setting' | 'realtime-monitor' | 'history-data';

@@ -4,6 +4,7 @@ import { Typography, Row, Col, Badge, Space } from 'antd';
 
 import { CurrentTime } from './current-time';
 import { UserLogined } from './user-login';
+import useTabBar from '@src/models/use-tabbar';
 
 const { Title } = Typography;
 
@@ -41,18 +42,20 @@ const HeaderContainer = styled.div`
     }
     .right-panel-time{
         padding: 0px 30px;
+        cursor: pointer;
     }
 `;
 
 export function HeaderMenu() {
+    const { setActiveBar } = useTabBar();
     return <HeaderContainer className='right'>
         <Row>
             <Col span={24}>
                 <Title className='main-title'>变电站声学检测系统</Title>
                 <Title className='sub-title' level={4}>Acoustic detection system for Substation</Title>
                 <Space className='right-panel' align='end' >
-                    <span className='right-panel-time' >
-                        <Badge count='9' className='badge-count' offset={[15, 0]} >
+                    <span className='right-panel-time' onClick={() => setActiveBar('history-data')} >
+                        <Badge count='9' className='badge-count' offset={[15, 0]}  >
                             <span>报警数目</span>
                         </Badge>
                     </span>

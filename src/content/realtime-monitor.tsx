@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Row, Col, Card, Button, Input } from 'antd';
 import ReactEcharts from "echarts-for-react";
-
-import charts from '../assets/charts.png';
 
 
 const MonitorContainer = styled.div`
@@ -63,10 +61,17 @@ const MonitorContainer = styled.div`
         width:100%;
         height:100px;
     }
+    .text-show-panel{
+        float: right;
+        color: #F5F6F4;
+        margin-top: -150px;
+        margin-right: 250px;
+    }
 `;
 
 // chart.setOption(option);
 export function RealTimeMonitor() {
+    const [timeNum, setTimeNum] = useState(null);
     const option = {
         title: {
             text: '设备运行状态图',
@@ -142,6 +147,11 @@ export function RealTimeMonitor() {
             option={option}
             notMerge={true}
             lazyUpdate={true}
-            theme={"theme_name"} />
+            theme={"theme_name"}
+            onEvents={{
+                'click': (evt) => setTimeNum(evt.value)
+            }}
+        />
+        {timeNum && <div className='text-show-panel' >设备已正常工作 {timeNum}小时</div>}
     </MonitorContainer >
 }
