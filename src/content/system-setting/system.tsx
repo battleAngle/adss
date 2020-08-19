@@ -58,14 +58,14 @@ const SettingContainer = styled.div`
 export function System() {
     return (
         <SettingContainer>
-            {/* <div className='card-buttons'>
+            <div className='card-buttons'>
                 <Button>
                     保存
             </Button>
                 <Button>
-                    编辑
+                    取消
             </Button>
-            </div> */}
+            </div>
             <Row className='row-padding' >
                 <Col span={10} offset={1}  >
                     <Card title='采集设置'>
