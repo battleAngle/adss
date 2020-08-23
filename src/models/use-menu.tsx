@@ -10,17 +10,17 @@ function useMenu() {
                 {
                     id: 2, title: '主变1',
                     children: [
-                        { id: 3, title: '音频设备分析1' },
-                        { id: 4, title: '音频设备分析2' },
-                        { id: 5, title: '音频设备分析3' }
+                        { id: 3, title: '音频设备分析1', ipAddress: '192.168.1.100' },
+                        { id: 4, title: '音频设备分析2', ipAddress: '192.168.1.101' },
+                        { id: 5, title: '音频设备分析3', ipAddress: '192.168.1.102' }
                     ]
                 },
                 {
                     id: 6, title: '主变2',
                     children: [
-                        { id: 7, title: '音频设备分析4' },
-                        { id: 8, title: '音频设备分析5' },
-                        { id: 9, title: '音频设备分析6' }
+                        { id: 7, title: '音频设备分析4', ipAddress: '192.168.1.103' },
+                        { id: 8, title: '音频设备分析5', ipAddress: '192.168.1.104' },
+                        { id: 9, title: '音频设备分析6', ipAddress: '192.168.1.105' }
                     ]
                 },
             ]
@@ -31,9 +31,9 @@ function useMenu() {
                 {
                     id: 22, title: '主变3',
                     children: [
-                        { id: 33, title: '音频设备分析7' },
-                        { id: 44, title: '音频设备分析8' },
-                        { id: 55, title: '音频设备分析9' }
+                        { id: 33, title: '音频设备分析7', ipAddress: '192.168.1.106' },
+                        { id: 44, title: '音频设备分析8', ipAddress: '192.168.1.107' },
+                        { id: 55, title: '音频设备分析9', ipAddress: '192.168.1.108' }
                     ]
                 },
             ]
