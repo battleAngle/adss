@@ -36,6 +36,37 @@ const HistoryDataStyle = styled.div`
         height:120px;
         margin:20px;
     }
+
+
+    .ant-table{
+        background-color: #1C1566;
+    }
+    .ant-table-wrapper{
+        background-color: #1C1566;
+    }
+    .ant-form-item-label > label{
+        color:#F5F6F4;
+    }
+    .ant-table td {
+        color:#F5F6F4;
+    }
+    .ant-table-thead{
+        background-color: #1C1566;
+    }
+    .ant-table-thead > tr > th {
+        color:#F5F6F4;
+        background-color: #123D9D;
+    }
+    .ant-input{
+        background-color: #1C1566;
+    }
+    .ant-table-tbody > tr.ant-table-row:hover > td{
+        color: #1890ff;
+        background-color: #1C1566;
+    }
+    .ant-table-tbody > tr > td {
+        border-bottom: 1px solid #005EC3;
+    }
 `
 
 const dataSource = [
@@ -149,7 +180,7 @@ export function HistoryData() {
                     <div className='title'>报警记录</div>
                     <Button className='history-export' type="link" icon={<PrinterTwoTone />} >导出报表</Button>
                 </div>
-                <Table size='small' columns={columns} dataSource={dataSource} style={{ margin: '20px' }} />
+                <Table columns={columns} dataSource={dataSource} style={{ margin: '20px' }} />
                 {
                     visible && <div className='history-detial'>
                         <img src='https://battleangle.github.io/adss/assets/charts.png' />
