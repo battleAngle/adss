@@ -14,7 +14,7 @@ const prodConfig: webpack.Configuration = merge(commonWebpackConfig, {
             verbose: true,
             dry: false,
             cleanOnceBeforeBuildPatterns: [
-                path.resolve(__dirname, '../docs')
+                path.resolve(__dirname, '../docs'),
             ]
         }),
         new processBarWebpackPlugin(),
