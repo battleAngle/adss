@@ -59,10 +59,10 @@ export function System() {
     return (
         <SettingContainer>
             <div className='card-buttons'>
-                <Button>
+                <Button type='primary' >
                     保存
             </Button>
-                <Button>
+                <Button type='primary' >
                     取消
             </Button>
             </div>

@@ -67,6 +67,29 @@ const MonitorContainer = styled.div`
         margin-top: -150px;
         margin-right: 250px;
     }
+
+    .charts-title{
+        color: #F5F6F4;
+        font-size: 26px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .time-line{
+        color: #F5F6F4;
+        font-size: 18px;
+        text-align: right;
+        padding-right: 40px;
+        margin-top: 40px;
+    }
+    .time-line span{
+        border: 1px solid #14659C;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        text-align: center;
+        margin: 0px 2px;
+        border-radius: 5px;
+    }
 `;
 
 // chart.setOption(option);
@@ -74,11 +97,12 @@ export function RealTimeMonitor() {
     const [timeNum, setTimeNum] = useState(null);
     const option = {
         title: {
-            text: '设备运行状态图',
+            // text: '设备正常运行状态统计',
             subtext: '',
             left: 'center',
             textStyle: {
-                color: '#F5F6F4'
+                color: '#F5F6F4',
+                fontSize: 26
             }
         },
         tooltip: {
@@ -90,7 +114,8 @@ export function RealTimeMonitor() {
             left: 'center',
             data: ['正常', '预警', '一般报警', '重要报警', '危急报警'],
             textStyle: {
-                color: '#F5F6F4'
+                color: '#F5F6F4',
+                bottom: '10px'
             }
         },
         series: [
@@ -118,40 +143,68 @@ export function RealTimeMonitor() {
     };
 
     return <MonitorContainer>
-        <Row className='row-padding'  >
-            <Col span={18} offset={1}  >
-                <img src='https://battleangle.github.io/adss/assets/charts.png' />
+
+        <Row>
+            <Col span={10}>
+                <div className='charts-title'>设备正常运行状态统计</div>
+                <div className='time-line' >
+                    <span>5</span>
+                    天
+                    <span>15</span>
+                    小时
+                    <span>25</span>
+                    分
+                    <span>30</span>
+                    秒
+                </div>
+                <ReactEcharts
+                    style={{ marginTop: '50px' }}
+                    option={option}
+                    notMerge={true}
+                    lazyUpdate={true}
+                    theme={"theme_name"}
+                    onEvents={{
+                        'click': (evt) => setTimeNum(evt.value)
+                    }}
+                />
             </Col>
-            <Col span={3} className='sub-name'>
-                时域
-            </Col>
-        </Row>
-        <Row className='row-padding' >
-            <Col span={18} offset={1}  >
-                <img src='https://battleangle.github.io/adss/assets/charts.png' />
-            </Col>
-            <Col span={3} className='sub-name'>
-                频域
-            </Col>
-        </Row>
-        <Row className='row-padding' >
-            <Col span={18} offset={1}  >
-                <img src='https://battleangle.github.io/adss/assets/charts.png' />
-            </Col>
-            <Col span={3} className='sub-name'>
-                时频域
+            <Col span={14}>
+                <>
+                    <Row className='row-padding'  >
+                        <Col span={22}  >
+                            <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={20} className='sub-name'>
+                            时域
+                        </Col>
+                    </Row>
+                    <Row className='row-padding' >
+                        <Col span={22} >
+                            <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={20} className='sub-name'>
+                            频域
+                        </Col>
+                    </Row>
+                    <Row className='row-padding' >
+                        <Col span={22}   >
+                            <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={20} className='sub-name'>
+                            时频域
+                        </Col>
+                    </Row>
+                </>
             </Col>
         </Row>
 
-        <ReactEcharts
-            option={option}
-            notMerge={true}
-            lazyUpdate={true}
-            theme={"theme_name"}
-            onEvents={{
-                'click': (evt) => setTimeNum(evt.value)
-            }}
-        />
-        {timeNum && <div className='text-show-panel' >设备已正常工作 {timeNum}小时</div>}
+
+
     </MonitorContainer >
 }
