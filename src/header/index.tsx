@@ -5,6 +5,7 @@ import { Typography, Row, Col, Badge, Space } from 'antd';
 import { CurrentTime } from './current-time';
 import { UserLogined } from './user-login';
 import useTabBar from '@src/models/use-tabbar';
+import useWarnRecords from '@src/models/use-warn-records';
 
 const { Title } = Typography;
 
@@ -48,6 +49,7 @@ const HeaderContainer = styled.div`
 
 export function HeaderMenu() {
     const { setActiveBar } = useTabBar();
+    const { records } = useWarnRecords();
     return <HeaderContainer className='right'>
         <Row>
             <Col span={24}>
@@ -55,7 +57,7 @@ export function HeaderMenu() {
                 <Title className='sub-title' level={4}>Acoustic detection system for Substation</Title>
                 <Space className='right-panel' align='end' >
                     <span className='right-panel-time' onClick={() => setActiveBar('history-data')} >
-                        <Badge count='9' className='badge-count' offset={[15, 0]}  >
+                        <Badge count={records.length} className='badge-count' offset={[15, 0]}  >
                             <span>报警数目</span>
                         </Badge>
                     </span>

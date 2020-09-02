@@ -1,14 +1,16 @@
 import { hot } from 'react-hot-loader/root'
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Layout } from 'antd';
+import { Layout, message } from 'antd';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
 
 import { HeaderMenu } from './header';
 import { SiderLayout } from './sider';
 import { ContentLayout } from './content';
-
+import { getMenuList, getWarnRecords } from './api';
+import useMenu from './models/use-menu';
+import useWarnRecords from './models/use-warn-records';
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,6 +28,27 @@ const AppContainer = styled.div`
 
 
 function App() {
+    const { setTreeData } = useMenu();
+    const { setRecords } = useWarnRecords();
+    useEffect(() => {
+        getMenuList((error, resp) => {
+            if (error || !resp) {
+                message.error('哦呦，接口报错了');
+                return;
+            }
+            const result = resp.result;
+            setTreeData(result);
+        });
+
+        getWarnRecords((error, resp) => {
+            if (error || !resp) {
+                message.error('哦呦，接口报错了');
+                return;
+            }
+            const result = resp.result;
+            setRecords(result);
+        })
+    }, []);
     return (
         <React.Suspense fallback={<div>Loading</div>}>
             <AppContainer>

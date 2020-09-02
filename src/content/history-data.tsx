@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Table, Button } from 'antd';
 import { PrinterTwoTone } from '@ant-design/icons';
+import useWarnRecords from '@src/models/use-warn-records';
 const HistoryDataStyle = styled.div`
     .history-body{
         background: #1c1565;
@@ -124,7 +125,14 @@ const dataSource = [
 
 export function HistoryData() {
     const [visible, setVisible] = useState(false);
-    const [viewState, setViewState] = useState('waveform');
+    const { records } = useWarnRecords();
+
+    const dataSource = records.map((record, index) => ({
+        index: index + 1,
+        equipment: record.equipment,
+        time: record.time,
+        status: record.status
+    }));
 
     const playAudio = () => {
         const mp3 = document.createElement('audio');
@@ -135,13 +143,13 @@ export function HistoryData() {
     const columns = [
         {
             title: '序号',
-            dataIndex: 'key',
-            key: 'key',
+            dataIndex: 'index',
+            key: 'index',
         },
         {
             title: '设备',
-            dataIndex: 'age',
-            key: 'age',
+            dataIndex: 'equipment',
+            key: 'equipment',
         },
         {
             title: '报警时间',
@@ -150,15 +158,14 @@ export function HistoryData() {
         },
         {
             title: '状态',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'status',
+            key: 'status',
         },
         {
             title: '详细',
             dataIndex: 'address',
             key: 'address',
             render: (_, record) => {
-                const editable;
                 return (
                     <span>
                         <a
