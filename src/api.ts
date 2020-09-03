@@ -8,6 +8,10 @@ export function getWarnRecords(callback: ResponseCallback<Result>) {
     ajax.get({ url: 'http://119.3.88.226/alarmRecord' }, callback);
 }
 
+export function getWaveData(callback: ResponseCallback<Result>) {
+    ajax.get({ url: 'http://119.3.88.226/waveData', }, callback)
+}
+
 
 export interface Result {
     code: number;

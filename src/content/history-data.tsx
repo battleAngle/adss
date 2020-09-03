@@ -138,7 +138,11 @@ export function HistoryData() {
         const mp3 = document.createElement('audio');
         mp3.src = 'https://www.w3school.com.cn/i/horse.mp3';
         mp3.play();
-    }
+    };
+
+    const showCharts = () => {
+        setVisible(true);
+    };
 
     const columns = [
         {
@@ -169,7 +173,7 @@ export function HistoryData() {
                 return (
                     <span>
                         <a
-                            onClick={() => setVisible(true)}
+                            onClick={showCharts}
                             style={{
                                 marginRight: 8,
                             }}>
