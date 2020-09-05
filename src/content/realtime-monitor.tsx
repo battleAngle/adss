@@ -6,6 +6,53 @@ import ReactEcharts from "echarts-for-react";
 import { getPieCharts, getWaveData } from '@src/api';
 
 
+export const setupOptions = (x: any, y: any) => ({
+    xAxis: {
+        type: 'category',
+        data: x,
+        axisLine: {
+            lineStyle: {
+                color: '#63618A'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: '#63618A'
+            }
+        },
+        nameTextStyle: {
+            color: '#F5F6F4',
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLine: {
+            lineStyle: {
+                color: '#63618A'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: '#63618A'
+            }
+        },
+        nameTextStyle: {
+            color: '#63618A'
+        }
+    },
+    series: [{
+        data: y,
+        type: 'line',
+        lineStyle: {
+            color: '#0DECE7'
+        },
+        itemStyle: {
+            color: '#0DECE7'
+
+        }
+    }]
+});
+
 
 const MonitorContainer = styled.div`
     background-color:#1C1566;
@@ -106,7 +153,12 @@ export function RealTimeMonitor() {
         { value: 735, name: '危急报警' }
     ]);
     const [runTime, setRunTime] = useState([5, 15, 25, 30]);
-
+    // 频域
+    const [frequencyData, setFrequencyData] = useState<{ x?: [], y?: [] }>({});
+    // 时域
+    const [timeDomainData, setTimeDomainData] = useState<{ x?: [], y?: [] }>({});
+    // 时频域
+    const [timeFrequencyData, setTimeFrequencyData] = useState<{ x?: [], y?: [] }>({});
 
     useEffect(() => {
         getPieCharts().then(resp => {
@@ -125,6 +177,19 @@ export function RealTimeMonitor() {
         getWaveData({ "equipment": "cp200001" })
             .then(resp => {
                 console.log(resp, 'resp');
+                const result = resp.result[0];
+                setFrequencyData({
+                    x: result.frequencyDomainDataX,
+                    y: result.frequencyDomainDataX
+                });
+                setTimeDomainData({
+                    x: result.timeDomainDataX,
+                    y: result.timeDomainDataY
+                });
+                setTimeFrequencyData({
+                    x: result.timeFrequencyDataX,
+                    y: result.timeFrequencyDataY
+                });
             }).catch(err => console.log(err, '波形显示'));
     }, [])
 
@@ -199,7 +264,13 @@ export function RealTimeMonitor() {
                 <>
                     <Row className='row-padding'  >
                         <Col span={22}  >
-                            <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                            {/* <img src='https://battleangle.github.io/adss/assets/charts.png' /> */}
+                            <ReactEcharts
+                                option={setupOptions(timeDomainData.x, timeDomainData.y)}
+                                notMerge={true}
+                                lazyUpdate={true}
+                                theme={"theme_name"}
+                            />
                         </Col>
                     </Row>
                     <Row>
@@ -209,7 +280,14 @@ export function RealTimeMonitor() {
                     </Row>
                     <Row className='row-padding' >
                         <Col span={22} >
-                            <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                            {/* <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                             */}
+                            <ReactEcharts
+                                option={setupOptions(frequencyData.x, frequencyData.y)}
+                                notMerge={true}
+                                lazyUpdate={true}
+                                theme={"theme_name"}
+                            />
                         </Col>
                     </Row>
                     <Row>
@@ -219,7 +297,13 @@ export function RealTimeMonitor() {
                     </Row>
                     <Row className='row-padding' >
                         <Col span={22}   >
-                            <img src='https://battleangle.github.io/adss/assets/charts.png' />
+                            {/* <img src='https://battleangle.github.io/adss/assets/charts.png' /> */}
+                            <ReactEcharts
+                                option={setupOptions(timeFrequencyData.x, timeFrequencyData.y)}
+                                notMerge={true}
+                                lazyUpdate={true}
+                                theme={"theme_name"}
+                            />
                         </Col>
                     </Row>
                     <Row>

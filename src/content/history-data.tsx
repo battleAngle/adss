@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Table, Button } from 'antd';
 import { PrinterTwoTone } from '@ant-design/icons';
+import ReactEcharts from "echarts-for-react";
+
 import useWarnRecords from '@src/models/use-warn-records';
+import { getTimeWaveData } from '@src/api';
+import { setupOptions } from './realtime-monitor';
+
 const HistoryDataStyle = styled.div`
     .history-body{
         background: #1c1565;
@@ -126,6 +131,7 @@ const dataSource = [
 export function HistoryData() {
     const [visible, setVisible] = useState(false);
     const { records } = useWarnRecords();
+    const [chartsData, setChartsData] = useState<{ x?: [], y?: [] }>({});
 
     const dataSource = records.map((record, index) => ({
         index: index + 1,
@@ -140,8 +146,18 @@ export function HistoryData() {
         mp3.play();
     };
 
-    const showCharts = () => {
+    const showCharts = (record: any) => {
         setVisible(true);
+        console.log(record, 'redd')
+        const { equipment, time } = record;
+        getTimeWaveData({ equipment, time }).then(resp => {
+            console.log(resp, 'resp')
+            const result = resp.result[0];
+            setChartsData({
+                x: result.timeDomainDataX,
+                y: result.timeDomainDataY
+            });
+        });
     };
 
     const columns = [
@@ -173,7 +189,7 @@ export function HistoryData() {
                 return (
                     <span>
                         <a
-                            onClick={showCharts}
+                            onClick={() => showCharts(record)}
                             style={{
                                 marginRight: 8,
                             }}>
@@ -193,9 +209,12 @@ export function HistoryData() {
                 </div>
                 <Table columns={columns} dataSource={dataSource} style={{ margin: '20px' }} />
                 {
-                    visible && <div className='history-detial'>
-                        <img src='https://battleangle.github.io/adss/assets/charts.png' />
-                    </div>
+                    visible && <ReactEcharts
+                        option={setupOptions(chartsData.x, chartsData.y)}
+                        notMerge={true}
+                        lazyUpdate={true}
+                        theme={"theme_name"}
+                    />
                 }
             </div>
 

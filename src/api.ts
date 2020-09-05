@@ -37,6 +37,10 @@ export async function saveEquipment(data: any) {
     return resp.data;
 }
 
+export async function getTimeWaveData(params: TimeWaveDataParams) {
+    const resp = await axios.get('http://119.3.88.226/showWave', { params });
+    return resp.data;
+}
 
 export interface Result {
     code: number;
@@ -58,4 +62,9 @@ export interface Alarm {
 
 export interface WaveDataParams {
     equipment: string;
+}
+
+export interface TimeWaveDataParams {
+    equipment: string;
+    time: string;
 }
