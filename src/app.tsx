@@ -31,23 +31,14 @@ function App() {
     const { setTreeData } = useMenu();
     const { setRecords } = useWarnRecords();
     useEffect(() => {
-        getMenuList((error, resp) => {
-            if (error || !resp) {
-                message.error('哦呦，接口报错了');
-                return;
-            }
+        getMenuList().then(resp => {
             const result = resp.result;
             setTreeData(result);
         });
-
-        getWarnRecords((error, resp) => {
-            if (error || !resp) {
-                message.error('哦呦，接口报错了');
-                return;
-            }
+        getWarnRecords().then(resp => {
             const result = resp.result;
             setRecords(result);
-        })
+        });
     }, []);
     return (
         <React.Suspense fallback={<div>Loading</div>}>

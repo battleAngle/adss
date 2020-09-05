@@ -127,7 +127,7 @@ class Request {
         return this.request({ ...requestParameters, ...({ type: 'json' }) }, callback);
     }
 
-    post(requestParameters: RequestParameters, callback: ResponseCallback<string>): Cancelable {
+    post(requestParameters: RequestParameters, callback: ResponseCallback<any>): Cancelable {
         return this.request({ ...requestParameters, ...({ method: 'POST' }) }, callback);
     }
 }

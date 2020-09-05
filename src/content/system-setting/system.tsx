@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Row, Col, Card, Button, Input } from 'antd';
 import { FolderOpenTwoTone } from '@ant-design/icons';
+
+import { Acq, Alarm, setAcquisition, setAlarm } from '@src/api';
 
 const SettingContainer = styled.div`
     background-color:#1C1566;
@@ -56,10 +58,46 @@ const SettingContainer = styled.div`
 `;
 
 export function System() {
+    const [acqData, setAcqData] = useState<Acq>({});
+    const [alarmData, setAlarmData] = useState<Alarm>({});
+
+
+    const onRrChange = (evt: any) => {
+        const { value } = evt.target;
+        setAcqData(Object.assign({}, acqData, { Rr: value }));
+    }
+    const onSrChange = (evt: any) => {
+        const { value } = evt.target;
+        setAcqData(Object.assign({}, acqData, { SR: value }));
+    }
+    const onSNRChange = (evt: any) => {
+        const { value } = evt.target;
+        setAcqData(Object.assign({}, acqData, { SNR: value }));
+    }
+
+    const onUpChange = (evt: any) => {
+        const { value } = evt.target;
+        setAlarmData(Object.assign({}, alarmData, { up: value }));
+    }
+    const onDownChange = (evt: any) => {
+        const { value } = evt.target;
+        setAlarmData(Object.assign({}, alarmData, { down: value }));
+    }
+    const onDbChange = (evt: any) => {
+        const { value } = evt.target;
+        setAlarmData(Object.assign({}, alarmData, { db: value }));
+    }
+
+    const saveParamsSettings = () => {
+        setAcquisition(acqData);
+        setAlarm(alarmData);
+    }
+
+
     return (
         <SettingContainer>
             <div className='card-buttons'>
-                <Button type='primary' >
+                <Button type='primary' onClick={saveParamsSettings}  >
                     保存
             </Button>
                 <Button type='primary' >
@@ -74,7 +112,7 @@ export function System() {
                                 <span className='title'>灵敏度</span>
                             </Col>
                             <Col span={15}>
-                                <Input size="small" defaultValue={120} />
+                                <Input size="small" value={acqData.Rr} onChange={onRrChange} />
                             </Col>
                         </Row>
                         <Row align="middle" className='sub-row-padding' >
@@ -82,7 +120,7 @@ export function System() {
                                 <span className='title'>采样率</span>
                             </Col>
                             <Col span={15}>
-                                <Input size="small" defaultValue={120} />
+                                <Input size="small" value={acqData.SR} onChange={onSrChange} />
                             </Col>
                         </Row>
                         <Row align="middle" className='sub-row-padding' >
@@ -90,7 +128,7 @@ export function System() {
                                 <span className='title'>信噪比</span>
                             </Col>
                             <Col span={15}>
-                                <Input size="small" defaultValue={120} />
+                                <Input size="small" value={acqData.SNR} onChange={onSNRChange} />
                             </Col>
                         </Row>
                     </Card>
@@ -102,10 +140,10 @@ export function System() {
                                 <span className='title'> 频率报警区域</span>
                             </Col>
                             <Col span={7}>
-                                <Input size="small" prefix='上限' suffix='HZ' />
+                                <Input size="small" prefix='上限' suffix='HZ' value={alarmData.up} onChange={onUpChange} />
                             </Col>
                             <Col span={7} offset={1}>
-                                <Input size="small" prefix='下限' suffix='HZ' />
+                                <Input size="small" prefix='下限' suffix='HZ' value={alarmData.down} onChange={onDownChange} />
                             </Col>
                         </Row>
                         <Row align="middle" className='sub-row-padding' style={{ paddingTop: '10px' }} >
@@ -113,7 +151,7 @@ export function System() {
                                 <span className='title'> 最大报警分贝</span>
                             </Col>
                             <Col span={15}>
-                                <Input size="small" defaultValue={120} />
+                                <Input size="small" value={alarmData.db} onChange={onDbChange} />
                             </Col>
                         </Row>
                     </Card>

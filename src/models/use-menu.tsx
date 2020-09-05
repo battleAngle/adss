@@ -2,8 +2,49 @@ import React, { useState } from 'react';
 import { createModel } from 'hox';
 import { cloneDeep, remove, uniqueId } from 'lodash';
 
+const setupTableData = (treeData: any) => {
+    const tableData: any[] = [];
+    let index = 0;
+    const parseTreeData = (data: any[], belongApp: string, fatherTitle?: string) => {
+        for (let i = 0; i < data.length; i++) {
+            const item = data[i];
+            if (item.children && item.children.length > 0) {
+                let fatherTitle = item.title;
+                parseTreeData(item.children, belongApp, fatherTitle);
+            } else {
+                tableData.push({
+                    index: ++index,
+                    application: belongApp,
+                    name: item.title,
+                    menu: fatherTitle || belongApp,
+                    menuTag: item.id,
+                    type: '菜单',
+                    ipAddr: item.ipAddress,
+                    status: '启用',
+                    sortId: item.id,
+                });
+            }
+        }
+    };
+
+    for (let i = 0, len = treeData.length; i < len; i++) {
+        const item = treeData[i];
+        const belongApp = item.title;
+        parseTreeData(treeData, belongApp);
+    }
+    return tableData;
+}
+
+
 function useMenu() {
-    const [treeData, setTreeData] = useState([]);
+    const [treeData, setPeerTreeData] = useState([]);
+    const [tableData, setTableData] = useState<any>([]);
+
+    const setTreeData = (treeData: any) => {
+        setPeerTreeData(treeData);
+        const table: any = setupTableData(treeData);
+        setTableData(table);
+    }
 
     const updateTitleById = (id: number, title: string) => {
         let existed = false;
@@ -80,6 +121,8 @@ function useMenu() {
 
     return {
         treeData,
+        tableData,
+        setTableData,
         setTreeData,
         updateTitleById,
         deleteById,

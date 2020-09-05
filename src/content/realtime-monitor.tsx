@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Row, Col, Card, Button, Input } from 'antd';
 import ReactEcharts from "echarts-for-react";
+
+import { getPieCharts, getWaveData } from '@src/api';
+
 
 
 const MonitorContainer = styled.div`
@@ -95,6 +98,35 @@ const MonitorContainer = styled.div`
 // chart.setOption(option);
 export function RealTimeMonitor() {
     const [timeNum, setTimeNum] = useState(null);
+    const [seriesData, setSeriesData] = useState([
+        { value: 1548, name: '正常' },
+        { value: 535, name: '预警' },
+        { value: 510, name: '一般报警' },
+        { value: 634, name: '重要报警' },
+        { value: 735, name: '危急报警' }
+    ]);
+    const [runTime, setRunTime] = useState([5, 15, 25, 30]);
+
+
+    useEffect(() => {
+        getPieCharts().then(resp => {
+            const result = resp.result[0];
+            const nextResult = [
+                { value: result.normal, name: '正常' },
+                { value: result.warning, name: '预警' },
+                { value: result.alarm, name: '一般报警' },
+                { value: result.important, name: '重要报警' },
+                { value: result.critical, name: '危急报警' }
+            ];
+            setSeriesData(nextResult);
+            setRunTime(result.duration);
+        });
+
+        getWaveData({ "equipment": "cp200001" }).then(resp => {
+            console.log(resp, 'resp');
+        });
+    }, [])
+
     const option = {
         title: {
             // text: '设备正常运行状态统计',
@@ -124,13 +156,7 @@ export function RealTimeMonitor() {
                 radius: '65%',
                 center: ['50%', '50%'],
                 selectedMode: 'single',
-                data: [
-                    { value: 1548, name: '正常' },
-                    { value: 535, name: '预警' },
-                    { value: 510, name: '一般报警' },
-                    { value: 634, name: '重要报警' },
-                    { value: 735, name: '危急报警' }
-                ],
+                data: seriesData,
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -148,13 +174,13 @@ export function RealTimeMonitor() {
             <Col span={10}>
                 <div className='charts-title'>设备正常运行状态统计</div>
                 <div className='time-line' >
-                    <span>5</span>
+                    <span>{runTime[0]}</span>
                     天
-                    <span>15</span>
+                    <span>{runTime[1]}</span>
                     小时
-                    <span>25</span>
+                    <span>{runTime[2]}</span>
                     分
-                    <span>30</span>
+                    <span>{runTime[3]}</span>
                     秒
                 </div>
                 <ReactEcharts
