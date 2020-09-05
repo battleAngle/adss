@@ -122,9 +122,10 @@ export function RealTimeMonitor() {
             setRunTime(result.duration);
         });
 
-        getWaveData({ "equipment": "cp200001" }).then(resp => {
-            console.log(resp, 'resp');
-        });
+        getWaveData({ "equipment": "cp200001" })
+            .then(resp => {
+                console.log(resp, 'resp');
+            }).catch(err => console.log(err, '波形显示'));
     }, [])
 
     const option = {
