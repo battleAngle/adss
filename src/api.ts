@@ -1,44 +1,61 @@
 import axios from 'axios';
 
+// const BASE_URL = 'http://119.3.88.226';
+const BASE_URL = 'http://127.0.0.1';
 
 
 export async function getMenuList() {
-    const resp = await axios.get('http://119.3.88.226/equipmentList');
+    const resp = await axios.get(BASE_URL + '/equipmentList');
     return resp.data;
 }
 
 export async function getWarnRecords() {
-    const resp = await axios.get('http://119.3.88.226/alarmRecord');
+    const resp = await axios.get(BASE_URL + '/alarmRecord');
     return resp.data;
 }
 
 export async function getWaveData(params: WaveDataParams) {
-    const resp = await axios.get('http://119.3.88.226/waveData', { params });
+    const resp = await axios.get(BASE_URL + '/waveData', { params });
     return resp.data;
 }
 
 export async function setAcquisition(data: Acq) {
-    const resp = await axios.post('http://119.3.88.226/acquisitionSetting', { ...data });
+    const resp = await axios.post(BASE_URL + '/acquisitionSetting', { ...data });
     return resp.data;
 }
 
 export async function setAlarm(data: Alarm) {
-    const resp = await axios.post('http://119.3.88.226/alarmSetting', { ...data });
+    const resp = await axios.post(BASE_URL + '/alarmSetting', { ...data });
     return resp.data;
 }
 
 export async function getPieCharts() {
-    const resp = await axios.get('http://119.3.88.226/pieChart');
+    const resp = await axios.get(BASE_URL + '/pieChart');
     return resp.data;
 }
 
 export async function saveEquipment(data: any) {
-    const resp = await axios.post('http://119.3.88.226/equipmentSetting', { reqSave: data });
+    const resp = await axios.post(BASE_URL + '/equipmentSetting', { reqSave: data });
     return resp.data;
 }
 
 export async function getTimeWaveData(params: TimeWaveDataParams) {
-    const resp = await axios.get('http://119.3.88.226/showWave', { params });
+    const resp = await axios.get(BASE_URL + '/showWave', { params });
+    return resp.data;
+}
+
+export async function getPlayAudioPath() {
+    const resp = await axios.get(BASE_URL + '/getPlayAudioPath');
+    return resp.data;
+}
+
+export async function getTime() {
+    const resp = await axios.get(BASE_URL + '/getTime');
+    return resp.data;
+}
+
+export async function getAlarmNum() {
+    const resp = await axios.get(BASE_URL + '/alarmNum');
     return resp.data;
 }
 

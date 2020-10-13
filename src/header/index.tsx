@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Typography, Row, Col, Badge, Space } from 'antd';
 
@@ -6,7 +6,7 @@ import { CurrentTime } from './current-time';
 import { UserLogined } from './user-login';
 import useTabBar from '@src/models/use-tabbar';
 import useWarnRecords from '@src/models/use-warn-records';
-
+import { getAlarmNum } from '@src/api';
 const { Title } = Typography;
 
 const HeaderContainer = styled.div`
@@ -50,6 +50,15 @@ const HeaderContainer = styled.div`
 export function HeaderMenu() {
     const { setActiveBar } = useTabBar();
     const { records } = useWarnRecords();
+    const [ alarmNum, setAlarmNumCount] = useState(0);
+
+    useEffect(() => {
+        getAlarmNum().then(resp => {
+            const result = resp.result.num;
+            setAlarmNumCount(result);
+        });
+    }, []);
+
     return <HeaderContainer className='right'>
         <Row>
             <Col span={24}>
@@ -58,7 +67,8 @@ export function HeaderMenu() {
                 <Space className='right-panel' align='end' >
                     <span className='right-panel-time' onClick={() => setActiveBar('history-data')} >
                         <Badge count={records.length} className='badge-count' offset={[15, 0]}  >
-                            <span>报警数目</span>
+                            <span>报警数目</span>&nbsp;&nbsp;
+                            <span>{alarmNum}</span>
                         </Badge>
                     </span>
                     {/* <span className='right-panel-time' > */}

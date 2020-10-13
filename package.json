@@ -76,7 +76,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
-    "@hi-ui/hiui": "^2.13.0",
+    "@hi-ui/hiui": "2.13.0",
     "antd": "^4.3.4",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
