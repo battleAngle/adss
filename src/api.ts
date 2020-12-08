@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const BASE_URL = 'http://119.3.88.226';
-const BASE_URL = 'http://127.0.0.1';
+const BASE_URL = 'http://127.0.0.1:5000';
 
 
 export async function getMenuList() {
@@ -44,8 +44,8 @@ export async function getTimeWaveData(params: TimeWaveDataParams) {
     return resp.data;
 }
 
-export async function getPlayAudioPath() {
-    const resp = await axios.get(BASE_URL + '/getPlayAudioPath');
+export async function getPlayAudioPath(params: AudioPathParams) {
+    const resp = await axios.get(BASE_URL + '/getPlayAudioPath',{params});
     return resp.data;
 }
 
@@ -79,9 +79,18 @@ export interface Alarm {
 
 export interface WaveDataParams {
     equipment: string;
+    currentFrame: number;
+    totalFrame: number;
 }
 
 export interface TimeWaveDataParams {
+    equipment: string;
+    time: string;
+    currentFrame: number;
+    totalFrame: number;
+}
+
+export interface AudioPathParams {
     equipment: string;
     time: string;
 }

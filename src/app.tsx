@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Layout, message } from 'antd';
 import styled from 'styled-components';
@@ -30,6 +30,8 @@ const AppContainer = styled.div`
 function App() {
     const { setTreeData } = useMenu();
     const { setRecords } = useWarnRecords();
+    const [ selectedEquipment, setSelectedEquipment] = useState('');
+
     useEffect(() => {
         getMenuList().then(resp => {
             const result = resp.result;
@@ -48,8 +50,8 @@ function App() {
                         <HeaderMenu></HeaderMenu>
                     </Header>
                     <Layout style={{ backgroundColor: '#210956' }} >
-                        <SiderLayout />
-                        <ContentLayout />
+                        <SiderLayout setSelectedEquipment={setSelectedEquipment}/>
+                        <ContentLayout selectedEquipment={selectedEquipment}/>
                     </Layout>
                 </Layout>
             </AppContainer>

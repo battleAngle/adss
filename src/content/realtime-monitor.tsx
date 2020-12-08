@@ -142,8 +142,12 @@ const MonitorContainer = styled.div`
     }
 `;
 
+let currentFrame = 0;
+let totalFrame = 0;
+
 // chart.setOption(option);
-export function RealTimeMonitor() {
+export function RealTimeMonitor(props) {
+
     const [timeNum, setTimeNum] = useState(null);
     const [seriesData, setSeriesData] = useState([
         { value: 1548, name: '正常' },
@@ -152,7 +156,7 @@ export function RealTimeMonitor() {
         { value: 634, name: '重要报警' },
         { value: 735, name: '危急报警' }
     ]);
-    const [runTime, setRunTime] = useState([5, 15, 25, 30]);
+    const [runTime, setRunTime] = useState([0, 0, 0, 0]);
     // 频域
     const [frequencyData, setFrequencyData] = useState<{ x?: [], y?: [] }>({});
     // 时域
@@ -161,38 +165,59 @@ export function RealTimeMonitor() {
     const [timeFrequencyData, setTimeFrequencyData] = useState<{ x?: [], y?: [] }>({});
 
     useEffect(() => {
-        getPieCharts().then(resp => {
-            const result = resp.result[0];
-            const nextResult = [
-                { value: result.normal, name: '正常' },
-                { value: result.warning, name: '预警' },
-                { value: result.alarm, name: '一般报警' },
-                { value: result.important, name: '重要报警' },
-                { value: result.critical, name: '危急报警' }
-            ];
-            setSeriesData(nextResult);
-            setRunTime(result.duration);
-        });
 
-        getWaveData({ "equipment": "cp200001" })
-            .then(resp => {
-                console.log(resp, 'resp');
+      
+        if(window._timer) {
+            window.clearInterval(window._timer);
+            currentFrame = 0;
+            totalFrame = 0;
+        }
+        window._timer = window.setInterval(() => {
+            getPieCharts().then(resp => {
                 const result = resp.result[0];
-                setFrequencyData({
-                    x: result.frequencyDomainDataX,
-                    y: result.frequencyDomainDataX
-                });
-                setTimeDomainData({
-                    x: result.timeDomainDataX,
-                    y: result.timeDomainDataY
-                });
-                setTimeFrequencyData({
-                    x: result.timeFrequencyDataX,
-                    y: result.timeFrequencyDataY
-                });
-            }).catch(err => console.log(err, '波形显示'));
-    }, [])
+                const nextResult = [
+                    { value: result.normal, name: '正常' },
+                    { value: result.warning, name: '预警' },
+                    { value: result.alarm, name: '一般报警' },
+                    { value: result.important, name: '重要报警' },
+                    { value: result.critical, name: '危急报警' }
+                ];
+                setSeriesData(nextResult);
+                setRunTime(result.duration);
+            });
+            console.log('currentFrame', currentFrame)
 
+            if(props.selectedEquipment) {
+                if(currentFrame === totalFrame) {
+                    currentFrame = 0;
+                    totalFrame = 0;
+                }
+                getWaveData({ "equipment": props.selectedEquipment, "currentFrame": currentFrame, "totalFrame": totalFrame})
+                    .then(resp => {
+                        const result = resp.result[0];
+                        currentFrame = result.currentFrame;
+                        totalFrame = result.totalFrame;
+                        setFrequencyData({
+                            x: result.frequencyDomainDataX,
+                            y: result.frequencyDomainDataY
+                        });
+                        setTimeDomainData({
+                            x: result.timeDomainDataX,
+                            y: result.timeDomainDataY
+                        });
+                        setTimeFrequencyData({
+                            x: result.timeFrequencyDataX,
+                            y: result.timeFrequencyDataY
+                        });
+                    }).catch(err => console.log(err, '波形显示'));
+            }
+            
+        },1000)
+
+        
+        
+    }, [props])
+   
     const option = {
         title: {
             // text: '设备正常运行状态统计',

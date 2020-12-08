@@ -6,8 +6,11 @@ import { PrinterTwoTone } from '@ant-design/icons';
 import ReactEcharts from "echarts-for-react";
 
 import useWarnRecords from '@src/models/use-warn-records';
-import { getTimeWaveData } from '@src/api';
+import { getTimeWaveData, getPlayAudioPath } from '@src/api';
 import { setupOptions } from './realtime-monitor';
+
+// const BASE_URL = 'http://119.3.88.226';
+const BASE_URL = 'http://127.0.0.1:5000';
 
 const HistoryDataStyle = styled.div`
     .history-body{
@@ -127,6 +130,8 @@ const dataSource = [
     }
 
 ]
+let currentFrame = 0;
+let totalFrame = 0;
 
 export function HistoryData() {
     const [visible, setVisible] = useState(false);
@@ -140,24 +145,38 @@ export function HistoryData() {
         status: record.status
     }));
 
-    const playAudio = () => {
+    const playAudio = (equipment: string, time: string) => {
         const mp3 = document.createElement('audio');
-        mp3.src = 'https://www.w3school.com.cn/i/horse.mp3';
-        mp3.play();
+        getPlayAudioPath({equipment, time}).then((resp)=>{
+            console.log(resp.result[0].audioPath)
+            mp3.src = BASE_URL + resp.result[0].audioPath;
+            mp3.play();
+        });
     };
 
     const showCharts = (record: any) => {
         setVisible(true);
         console.log(record, 'redd')
         const { equipment, time } = record;
-        getTimeWaveData({ equipment, time }).then(resp => {
-            console.log(resp, 'resp')
-            const result = resp.result[0];
-            setChartsData({
-                x: result.timeDomainDataX,
-                y: result.timeDomainDataY
-            });
-        });
+        if(window._timer) {
+            window.clearInterval(window._timer);
+            currentFrame = 0;
+            totalFrame = 0;
+        }
+        window._timer = window.setInterval(() => {
+
+            if(currentFrame !== totalFrame || (currentFrame === 0 && totalFrame === 0)) {
+                getTimeWaveData({ equipment, time, currentFrame ,totalFrame}).then(resp => {
+                    console.log(resp, 'resp')
+                    const result = resp.result[0];
+                    setChartsData({
+                        x: result.timeDomainDataX,
+                        y: result.timeDomainDataY
+                    });
+                });
+            }
+        },1000)
+        
     };
 
     const columns = [
@@ -194,7 +213,7 @@ export function HistoryData() {
                                 marginRight: 8,
                             }}>
                             波形显示 </a>
-                        <a onClick={playAudio} >音频播放</a>
+                        <a onClick={()=> {playAudio(record.equipment, record.time)}} >音频播放</a>
                     </span>
                 )
             },

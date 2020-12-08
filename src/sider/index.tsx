@@ -20,11 +20,11 @@ const styles = {
     }
 }
 
-export function SiderLayout() {
+export function SiderLayout(props) {
     return (
         <Sider theme='light' style={styles.sider}  >
             <Title level={2} style={styles.title}>设备列表</Title>
-            <SiderMenu />
+            <SiderMenu setSelected={props.setSelectedEquipment}/>
         </Sider>
     );
 }

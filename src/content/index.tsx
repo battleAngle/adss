@@ -15,12 +15,13 @@ const ContentBox = styled.div`
 `;
 const { Content } = Layout;
 
-export function ContentLayout() {
+export function ContentLayout(props) {
+
     const { activeBar, setActiveBar } = useTabBar();
     let Bar = null;
     switch (activeBar) {
         case 'realtime-monitor':
-            Bar = <RealTimeMonitor />
+            Bar = <RealTimeMonitor selectedEquipment={props.selectedEquipment}/>
             break;
         case 'history-data':
             Bar = <HistoryData />
